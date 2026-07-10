@@ -1,0 +1,20 @@
+Lab 06 – EEG Band-pass Filtering
+
+Dataset : EEGBCI (Subject 1 – Run 4)
+
+Filter Type : Band-pass
+
+Lower cutoff frequency : 1 Hz
+
+Upper cutoff frequency : 40 Hz
+
+Method : FIR Filter (MNE)
+
+Purpose :
+Remove low-frequency drift and high-frequency noise while preserving EEG information.
+
+Output Figure :
+figures/lab06_filtered_eeg.png
+
+Status :
+Filtering completed successfully.
