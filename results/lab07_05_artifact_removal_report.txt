@@ -1,0 +1,27 @@
+
+Lab 07.5 - ICA Artifact Removal
+============================================================
+
+Dataset:
+EEGBCI
+
+Subject:
+1
+
+Run:
+4
+
+Method:
+Independent Component Analysis (ICA)
+
+Algorithm:
+FastICA
+
+Removed Components:
+[0, 1]
+
+Output Figure:
+figures/lab07_cleaned_eeg.png
+
+Status:
+Artifact removal completed successfully.
