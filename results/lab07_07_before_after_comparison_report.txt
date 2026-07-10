@@ -1,0 +1,51 @@
+
+Lab 07.7 - Before vs After Comparison
+============================================================
+
+Dataset
+-------
+EEGBCI
+
+Subject
+-------
+1
+
+Run
+---
+4
+
+Manual Components Removed
+-------------------------
+[0, 1]
+
+Automatic Components Removed
+----------------------------
+[]
+
+Generated Figures
+-----------------
+
+figures/lab07_original_eeg.png
+
+figures/lab07_manual_cleaned_eeg.png
+
+figures/lab07_auto_cleaned_eeg.png
+
+Summary
+-------
+
+Original EEG:
+Raw EEG after filtering.
+
+Manual ICA:
+Artifacts removed using manually selected ICA components.
+
+Automatic ICA:
+Artifacts removed automatically when EOG channels are available.
+For the EEGBCI dataset, no dedicated EOG channel exists,
+therefore automatic removal was skipped.
+
+Status
+------
+
+Lab 07.7 completed successfully.
