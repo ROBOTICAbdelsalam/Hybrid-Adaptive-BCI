@@ -1,0 +1,21 @@
+Lab 07.1 – ICA Model Training
+
+Dataset:
+EEGBCI (Subject 1 – Run 4)
+
+Preprocessing:
+- Band-pass filter: 1–40 Hz
+
+ICA Configuration:
+- Method: FastICA
+- Number of Components: 20
+- Random State: 42
+
+Purpose:
+Train an Independent Component Analysis (ICA) model to separate EEG signals into independent sources. This model will later be used to identify and remove artifacts such as eye blinks and muscle activity.
+
+Result:
+ICA model trained successfully.
+
+Status:
+Completed successfully.
