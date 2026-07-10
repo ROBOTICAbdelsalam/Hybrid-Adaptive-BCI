@@ -1,0 +1,23 @@
+Lab 07.2 - ICA Components Visualization
+=======================================
+
+Dataset:
+EEGBCI (Subject 1 - Run 4)
+
+Method:
+Independent Component Analysis (ICA)
+
+Algorithm:
+FastICA
+
+Number of Components:
+20
+
+Purpose:
+Visualize independent EEG components in order to identify artifacts such as eye blinks, muscle activity, and electrical noise.
+
+Output Figure:
+figures/lab07_ica_components_page_1.png
+
+Status:
+Completed Successfully.

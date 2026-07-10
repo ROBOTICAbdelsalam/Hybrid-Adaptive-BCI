@@ -1,0 +1,11 @@
+Lab 05 - EEG Dataset Information
+
+Number of channels : 64
+
+Sampling frequency : 160 Hz
+
+Recording duration : 124.99 seconds
+
+Channel type : EEG
+
+Dataset : EEGBCI (Subject 1 - Run 4)

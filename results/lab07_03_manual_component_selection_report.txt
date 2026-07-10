@@ -1,0 +1,37 @@
+
+Lab 07.3 - Manual ICA Component Selection
+=========================================
+
+Dataset
+-------
+EEGBCI
+Subject : 1
+Run     : 4
+
+Method
+------
+Manual ICA Component Inspection
+
+Algorithm
+---------
+FastICA
+
+Number of Components
+--------------------
+20
+
+Purpose
+-------
+Identify artifact-related ICA components manually before signal reconstruction.
+
+Output Figure
+-------------
+figures/lab07_ica_components_page_1.png
+
+Selected Components
+-------------------
+[]
+
+Status
+------
+Waiting for manual artifact selection.
