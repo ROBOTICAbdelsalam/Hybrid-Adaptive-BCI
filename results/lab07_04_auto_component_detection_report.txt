@@ -1,0 +1,18 @@
+Lab 07.4 - Automatic ICA Component Detection
+============================================================
+
+Dataset : EEGBCI
+Subject : 1
+Run     : 4
+
+Detection Method : Automatic
+
+Result
+------
+No dedicated EOG channel found.
+Automatic component detection skipped.
+
+Recommendation
+--------------
+Use manual ICA selection.
+Or use an EEG dataset with EOG channels.
