@@ -1,0 +1,24 @@
+
+Lab 07.6 - Automatic ICA Artifact Removal
+============================================================
+
+Dataset:
+EEGBCI
+
+Subject:
+1
+
+Run:
+4
+
+Method:
+Automatic ICA Artifact Removal
+
+Detected Components:
+[]
+
+Output Figure:
+figures/lab07_auto_cleaned_eeg.png
+
+Status:
+Automatic artifact removal completed.
