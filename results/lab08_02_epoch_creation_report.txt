@@ -1,0 +1,11 @@
+Lab 08.2 - Epoch Creation
+==================================================
+
+Subject : 1
+Run     : [4]
+
+Number of Epochs : 29
+Epoch Shape      : (29, 64, 161)
+
+Event IDs
+{np.str_('T0'): 1, np.str_('T1'): 2, np.str_('T2'): 3}
