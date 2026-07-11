@@ -1,0 +1,10 @@
+Lab 08.3 - Baseline Correction
+==================================================
+
+Subject : 1
+Run : [4]
+
+Baseline Window : (-0.2, 0.0) sec
+
+Valid Epochs : 29
+Epoch Shape : (29, 64, 161)
