@@ -87,6 +87,8 @@ figures/lab08_events.png
 **Figure 1.** Event markers extracted from the EEG recording. Each color represents one experimental condition in the EEGBCI dataset.
 
 ---
+![Event Extraction](images/lab08_events.png)
+
 
 ## Discussion
 
