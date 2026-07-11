@@ -104,6 +104,23 @@ This laboratory also provides an important baseline for comparing EEG signals be
 Lab 04 successfully demonstrated how raw EEG recordings can be visualized using the MNE-Python framework. The generated visualization confirmed that the EEG recordings were correctly loaded and ready for preprocessing in subsequent laboratories.
 
 ---
+---
+
+# Generated Figure
+
+![Manual ICA Inspection](images/lab07_ica_components_page_1.png)
+
+**Figure 1.** ICA components inspected during manual component selection.
+
+---
+
+# Figure Analysis
+
+The ICA components displayed in Figure 1 were visually inspected to identify possible physiological artifacts.
+
+Only the component indices were recorded during this laboratory.
+
+No components were removed at this stage.
 
 # Next Laboratory
 

@@ -225,7 +225,21 @@ After completing this laboratory, the project achieved the following:
 3. Niedermeyer E., Silva FL. *Electroencephalography: Basic Principles, Clinical Applications and Related Fields.*
 
 ---
+---
 
+# Generated Figure
+
+![Manual Cleaned EEG](images/lab07_manual_cleaned_eeg.png)
+
+**Figure 1.** EEG recording after manual ICA artifact removal.
+
+---
+
+# Figure Analysis
+
+The EEG recording shown above was reconstructed after removing the manually selected ICA components.
+
+The cleaned signal exhibits reduced artifact contamination while preserving the underlying neural activity.
 # 14. Next Laboratory
 
 **Lab 06 – EEG Signal Filtering**
