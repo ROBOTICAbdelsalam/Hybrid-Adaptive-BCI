@@ -1,0 +1,10 @@
+Lab 08.4 - Epoch Visualization
+==================================================
+
+Subject : 1
+Run     : [4]
+
+Valid Epochs : 29
+Epoch Shape  : (29, 64, 161)
+
+Visualization completed successfully.
