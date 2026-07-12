@@ -1,0 +1,10 @@
+Lab09.4 Band Power Extraction
+==================================================
+
+Epochs : 29
+
+Delta: 1-4 Hz
+Theta: 4-8 Hz
+Alpha: 8-13 Hz
+Beta: 13-30 Hz
+Gamma: 30-40 Hz
