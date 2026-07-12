@@ -4,3 +4,11 @@ Lab09.6 - Feature Selection
 Original Features : 22
 Selected Features : 14
 Epochs            : 29
+
+Feature Groups
+------------------
+TD_   : Time Domain
+FD_   : Frequency Domain
+PSD_  : Power Spectral Density
+BP_   : Band Power
+STAT_ : Statistical Features

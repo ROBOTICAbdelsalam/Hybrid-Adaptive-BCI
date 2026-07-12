@@ -1,3 +1,4 @@
+
 import os
 import pandas as pd
 from sklearn.feature_selection import VarianceThreshold
@@ -20,7 +21,7 @@ band_df = pd.read_csv("features/band_power_features.csv").add_prefix("BP_")
 stat_df = pd.read_csv("features/statistical_features.csv").add_prefix("STAT_")
 
 # --------------------------------------------------
-# Merge All Features
+# Merge Features
 # --------------------------------------------------
 
 all_features = pd.concat(
@@ -31,7 +32,7 @@ all_features = pd.concat(
 print(f"Original Feature Matrix : {all_features.shape}")
 
 # --------------------------------------------------
-# Variance Threshold
+# Remove Low Variance Features
 # --------------------------------------------------
 
 selector = VarianceThreshold(threshold=1e-12)
@@ -48,17 +49,18 @@ final_df = pd.DataFrame(
 print(f"Selected Feature Matrix : {final_df.shape}")
 
 # --------------------------------------------------
-# Save Final Feature Matrix
+# Save Final Matrix
 # --------------------------------------------------
 
-output_file = "features/final_feature_matrix.csv"
-
-final_df.to_csv(output_file, index=False)
+final_df.to_csv(
+    "features/final_feature_matrix.csv",
+    index=False
+)
 
 print("Final Feature Matrix Saved.")
 
 # --------------------------------------------------
-# Report
+# Save Report
 # --------------------------------------------------
 
 with open(
@@ -72,7 +74,16 @@ with open(
 
     report.write(f"Original Features : {all_features.shape[1]}\n")
     report.write(f"Selected Features : {final_df.shape[1]}\n")
-    report.write(f"Epochs            : {final_df.shape[0]}\n")
+    report.write(f"Epochs            : {final_df.shape[0]}\n\n")
+
+    report.write("Feature Groups\n")
+    report.write("------------------\n")
+    report.write("TD_   : Time Domain\n")
+    report.write("FD_   : Frequency Domain\n")
+    report.write("PSD_  : Power Spectral Density\n")
+    report.write("BP_   : Band Power\n")
+    report.write("STAT_ : Statistical Features\n")
 
 print("Report Saved.")
+
 print("\nLab09.6 Finished Successfully.")
