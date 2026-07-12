@@ -1,0 +1,27 @@
+Chapter 10 - Common Spatial Patterns (CSP)
+============================================================
+
+Completed Laboratories
+----------------------
+Lab10.1 - CSP Theory
+Lab10.2 - Train CSP
+Lab10.3 - Transform EEG Signals
+Lab10.4 - CSP Feature Analysis
+Lab10.5 - Save CSP Features
+
+Final Dataset Summary
+----------------------
+Samples           : 30
+Features          : 4
+Missing Values    : 0
+
+Generated Files
+----------------------
+csp/csp_model.pkl
+csp/csp_features.csv
+csp/csp_dataset.csv
+
+Results
+----------------------
+The CSP feature extraction pipeline completed successfully.
+The generated dataset is ready for Machine Learning classification.
