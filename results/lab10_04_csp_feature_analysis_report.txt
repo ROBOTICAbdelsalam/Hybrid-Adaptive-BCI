@@ -1,0 +1,8 @@
+Lab10.4 - CSP Feature Analysis
+==================================================
+
+Samples : 30
+Features: 4
+
+Descriptive statistics generated.
+Correlation matrix generated.
