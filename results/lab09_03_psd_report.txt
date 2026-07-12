@@ -1,0 +1,6 @@
+Lab09.3 - Power Spectral Density
+==================================================
+
+Epochs : 29
+Shape  : (29, 64, 161)
+Frequency Range : 2.0 - 39.8 Hz
