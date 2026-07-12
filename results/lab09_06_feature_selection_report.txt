@@ -1,0 +1,6 @@
+Lab09.6 - Feature Selection
+==================================================
+
+Original Features : 22
+Selected Features : 14
+Epochs            : 29
