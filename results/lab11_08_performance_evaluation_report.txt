@@ -1,0 +1,24 @@
+Lab11.8 - Performance Evaluation
+============================================================
+
+Machine Learning Models
+------------------------------------------------------------
+        Model  Accuracy  Precision  Recall  F1 Score
+          SVM    0.8333     0.7083  0.8333    0.7619
+Random Forest    0.6667     0.6667  0.6667    0.6667
+      XGBoost    0.8333     0.7083  0.8333    0.7619
+
+Average Performance
+------------------------------------------------------------
+Accuracy : 0.7778
+Precision: 0.6944
+Recall   : 0.7778
+F1 Score : 0.7302
+
+Best Performing Model
+------------------------------------------------------------
+Model     : SVM
+Accuracy  : 0.8333
+Precision : 0.7083
+Recall    : 0.8333
+F1 Score  : 0.7619
