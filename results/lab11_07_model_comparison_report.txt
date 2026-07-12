@@ -1,0 +1,10 @@
+Lab11.7 - Model Comparison
+============================================================
+
+        Model  Accuracy  Precision  Recall  F1 Score
+          SVM    0.8333     0.7083  0.8333    0.7619
+Random Forest    0.6667     0.6667  0.6667    0.6667
+      XGBoost    0.8333     0.7083  0.8333    0.7619
+
+Best Model : SVM
+Accuracy   : 0.8333
