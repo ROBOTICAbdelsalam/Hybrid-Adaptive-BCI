@@ -1,0 +1,22 @@
+Lab09.7 - Feature Summary Report
+=======================================================
+
+Number of Epochs      : 29
+Selected Features     : 14
+
+Feature Names
+-------------------------------------------------------
+TD_Mean
+TD_Std
+TD_Max
+TD_Min
+TD_PeakToPeak
+TD_RMS
+FD_MeanSpectrum
+FD_MaxSpectrum
+FD_DominantFrequencyIndex
+STAT_Mean
+STAT_Std
+STAT_Median
+STAT_Skewness
+STAT_Kurtosis
