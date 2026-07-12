@@ -1,0 +1,14 @@
+Lab09.5 Statistical Features
+==================================================
+
+Epochs : 29
+Shape : (29, 64, 161)
+
+Extracted Features
+------------------
+Mean
+Standard Deviation
+Variance
+Median
+Skewness
+Kurtosis
