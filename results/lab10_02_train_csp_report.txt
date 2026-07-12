@@ -1,6 +1,6 @@
 Lab10.2 - Train CSP
 ==================================================
 
-Original Shape : (30, 64, 161)
-CSP Shape      : (30, 4)
+Original Shape : (29, 64, 161)
+CSP Shape      : (29, 4)
 Components     : 4

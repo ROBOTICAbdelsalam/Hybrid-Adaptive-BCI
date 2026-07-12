@@ -11,39 +11,19 @@ print("="*60)
 
 os.makedirs("csp", exist_ok=True)
 os.makedirs("results", exist_ok=True)
-
-subject = 1
-runs = [4]
-
 # --------------------------------------------------
-# Load EEG Dataset
+# Load Processed Epochs
 # --------------------------------------------------
 
-files = eegbci.load_data(subject, runs)
-
-raw = mne.io.read_raw_edf(
-    files[0],
-    preload=True,
-    verbose=False
-)
-
-raw.rename_channels(lambda x: x.strip("."))
-
-events, event_id = mne.events_from_annotations(raw)
-
-epochs = mne.Epochs(
-    raw,
-    events,
-    event_id=event_id,
-    tmin=0.0,
-    tmax=1.0,
-    baseline=None,
+epochs = mne.read_epochs(
+    "processed_data/subject01_run04-epo.fif",
     preload=True,
     verbose=False
 )
 
 X = epochs.get_data()
 
+print("Epoch Shape :", X.shape)
 # --------------------------------------------------
 # Load CSP Model
 # --------------------------------------------------
