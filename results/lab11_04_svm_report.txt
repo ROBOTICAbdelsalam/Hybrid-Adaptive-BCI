@@ -1,0 +1,19 @@
+Lab11.4 - SVM Classifier
+============================================================
+
+Accuracy : 0.8333
+Precision: 0.7083
+Recall   : 0.8333
+F1 Score : 0.7619
+
+Classification Report
+------------------------------------------------------------
+              precision    recall  f1-score   support
+
+           1       0.75      1.00      0.86         3
+           2       1.00      1.00      1.00         2
+           3       0.00      0.00      0.00         1
+
+    accuracy                           0.83         6
+   macro avg       0.58      0.67      0.62         6
+weighted avg       0.71      0.83      0.76         6
