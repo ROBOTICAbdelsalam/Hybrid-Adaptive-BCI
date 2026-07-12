@@ -1,0 +1,14 @@
+Lab09.1 - Time Domain Features
+==================================================
+
+Epochs : 29
+Shape  : (29, 64, 161)
+
+Extracted Features
+------------------
+Mean
+Standard Deviation
+Maximum
+Minimum
+Peak-to-Peak
+Root Mean Square
