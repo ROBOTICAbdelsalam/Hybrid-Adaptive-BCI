@@ -1,0 +1,14 @@
+Lab12.1 - Deep Learning Dataset Preparation
+============================================================
+
+Training Samples : 23
+Testing Samples  : 6
+
+Training Shape : (23, 4, 1)
+Testing Shape  : (6, 4, 1)
+
+Classes
+------------------------------
+1
+2
+3
