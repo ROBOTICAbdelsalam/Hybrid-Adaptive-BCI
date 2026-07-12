@@ -1,7 +1,7 @@
 Lab10.5 - Save CSP Features
 ==================================================
 
-Samples        : 30
+Samples        : 29
 Features       : 4
 Missing Values : 0
 
