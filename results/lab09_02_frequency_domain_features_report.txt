@@ -1,0 +1,11 @@
+Lab09.2 - Frequency Domain Features
+==================================================
+
+Epochs : 29
+Shape  : (29, 64, 161)
+
+Extracted Features
+------------------
+Mean Spectrum
+Maximum Spectrum
+Dominant Frequency Index
