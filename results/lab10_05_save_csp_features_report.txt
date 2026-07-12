@@ -1,0 +1,8 @@
+Lab10.5 - Save CSP Features
+==================================================
+
+Samples        : 30
+Features       : 4
+Missing Values : 0
+
+Dataset successfully prepared for Machine Learning.
