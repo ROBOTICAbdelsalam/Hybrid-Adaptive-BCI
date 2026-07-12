@@ -1,0 +1,6 @@
+Lab10.1 - CSP Theory
+==================================================
+
+Epoch Shape : (30, 64, 161)
+Classes     : [np.int64(1), np.int64(2), np.int64(3)]
+CSP Components : 4
