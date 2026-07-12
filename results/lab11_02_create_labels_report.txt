@@ -1,0 +1,6 @@
+Lab11.2 - Create Labels
+=======================================================
+
+Samples : 29
+Classes : [np.int32(1), np.int32(2), np.int32(3)]
+Features: 4
