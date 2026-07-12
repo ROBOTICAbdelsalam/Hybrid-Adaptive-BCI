@@ -1,0 +1,13 @@
+Lab11.1 - Dataset Preparation
+=======================================================
+
+Samples        : 30
+Features       : 4
+Missing Values : 0
+
+Columns
+-------------------------------------------------------
+CSP_1
+CSP_2
+CSP_3
+CSP_4
