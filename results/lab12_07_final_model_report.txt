@@ -1,0 +1,12 @@
+Lab12.7 - Save Best Deep Learning Model
+============================================================
+
+Selected Model : CNN
+Accuracy       : 1.0000
+Precision      : 1.0000
+Recall         : 1.0000
+F1 Score       : 1.0000
+
+Final Model Path
+--------------------------
+models/final_deep_learning_model.keras
