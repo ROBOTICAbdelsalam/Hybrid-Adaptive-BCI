@@ -1,0 +1,10 @@
+Lab12.6 - Performance Evaluation
+============================================================
+
+Best Deep Learning Model
+
+Model        CNN
+Accuracy     1.0
+Precision    1.0
+Recall       1.0
+F1 Score     1.0
