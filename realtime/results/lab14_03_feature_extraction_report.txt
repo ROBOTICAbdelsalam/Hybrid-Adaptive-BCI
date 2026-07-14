@@ -1,0 +1,8 @@
+Lab14.3 - Online CSP Feature Extraction
+============================================================
+
+Input File : realtime/data/preprocessed_eeg.csv
+Output File : realtime/data/realtime_features.csv
+Window Size : 250
+Windows : 5
+Features : 8
