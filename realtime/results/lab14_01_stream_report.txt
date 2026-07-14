@@ -1,0 +1,8 @@
+Lab14.1 - Live EEG Streaming
+============================================================
+
+Channels : 8
+Sampling Rate : 250
+Duration : 5
+Samples : 1250
+Output File : realtime/data/live_eeg_stream.csv
