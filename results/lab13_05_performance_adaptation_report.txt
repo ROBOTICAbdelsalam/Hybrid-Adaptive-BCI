@@ -1,0 +1,14 @@
+Lab13.5 - Performance Adaptation
+============================================================
+
+            Metric   Value
+  Feedback Samples       3
+ Feedback Accuracy     1.0
+Adaptive Threshold     0.9
+   Online Learning WAITING
+ Classifier Update WAITING
+  Adaptation Score     0.9
+
+System Analysis
+-----------------------------
+The adaptive system is collecting more feedback before updating the classifier.
