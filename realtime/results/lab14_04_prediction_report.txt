@@ -1,0 +1,12 @@
+Lab14.4 - Real-Time Prediction
+============================================================
+
+Input Shape : (5, 4, 1)
+Average Confidence : 0.7450
+
+ Prediction  Confidence
+          2    0.764646
+          2    0.721315
+          2    0.751487
+          2    0.728497
+          2    0.758895
