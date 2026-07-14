@@ -1,0 +1,9 @@
+Lab14.2 - Real-Time Preprocessing
+============================================================
+
+Input File : realtime/data/live_eeg_stream.csv
+Output File : realtime/data/preprocessed_eeg.csv
+Sampling Rate : 250
+Band-pass : 8-30 Hz
+Channels : 8
+Samples : 1250
