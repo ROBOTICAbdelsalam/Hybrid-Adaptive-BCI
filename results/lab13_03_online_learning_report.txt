@@ -1,0 +1,9 @@
+Lab13.3 - Online Learning
+============================================================
+
+Feedback Samples : 3
+Feedback Accuracy: 1.00
+Adaptive Threshold: 0.90
+Status : WAITING
+
+Collect 7 more feedback samples before updating the classifier.
