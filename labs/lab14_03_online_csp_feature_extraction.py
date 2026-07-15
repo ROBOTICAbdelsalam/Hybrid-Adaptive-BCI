@@ -7,7 +7,7 @@ print("Lab14.3 - Online CSP Feature Extraction")
 print("=" * 60)
 
 # --------------------------------------------------
-# Create Folder
+# Create Output Folder
 # --------------------------------------------------
 
 os.makedirs("realtime/results", exist_ok=True)
@@ -19,26 +19,22 @@ os.makedirs("realtime/results", exist_ok=True)
 input_file = "realtime/data/preprocessed_eeg.csv"
 
 if not os.path.exists(input_file):
-
     print("Preprocessed EEG file not found.")
     exit()
 
 eeg = pd.read_csv(input_file)
 
 print("\nPreprocessed EEG Shape")
-
 print(eeg.shape)
 
 # --------------------------------------------------
 # Window Configuration
 # --------------------------------------------------
 
-window_size = 250
-
+window_size = 250          # 1 second @250Hz
 num_windows = len(eeg) // window_size
 
 print(f"\nWindow Size : {window_size}")
-
 print(f"Number of Windows : {num_windows}")
 
 # --------------------------------------------------
@@ -50,24 +46,37 @@ features = []
 for i in range(num_windows):
 
     start = i * window_size
-
     end = start + window_size
 
     window = eeg.iloc[start:end]
 
+    # Variance of each EEG channel
     variance = np.var(window.values, axis=0)
 
+    # Log-Variance
     log_variance = np.log(variance + 1e-10)
 
-    features.append(log_variance)
+    # --------------------------------------------------
+    # IMPORTANT
+    # CNN expects ONLY 4 input features
+    # --------------------------------------------------
+
+    feature_vector = log_variance[:4]
+
+    features.append(feature_vector)
+
+# --------------------------------------------------
+# Convert to DataFrame
+# --------------------------------------------------
 
 features = np.array(features)
 
-feature_names = []
-
-for i in range(features.shape[1]):
-
-    feature_names.append(f"CSP_Feature_{i+1}")
+feature_names = [
+    "Feature_1",
+    "Feature_2",
+    "Feature_3",
+    "Feature_4"
+]
 
 features_df = pd.DataFrame(
     features,
@@ -88,40 +97,35 @@ features_df.to_csv(
 print("\nFeatures Saved Successfully.")
 
 print("\nFeature Matrix Shape")
-
 print(features_df.shape)
 
 print("\nExtracted Features")
+print(features_df)
 
-print(features_df.head())
+# --------------------------------------------------
+# Statistics
+# --------------------------------------------------
+
+print("\nFeature Statistics")
+print(features_df.describe())
 
 # --------------------------------------------------
 # Save Report
 # --------------------------------------------------
 
-with open(
+report_file = "realtime/results/lab14_03_feature_extraction_report.txt"
 
-    "realtime/results/lab14_03_feature_extraction_report.txt",
-
-    "w",
-
-    encoding="utf-8"
-
-) as report:
+with open(report_file, "w", encoding="utf-8") as report:
 
     report.write("Lab14.3 - Online CSP Feature Extraction\n")
-
     report.write("=" * 60 + "\n\n")
 
-    report.write(f"Input File : {input_file}\n")
-
-    report.write(f"Output File : {output_file}\n")
-
-    report.write(f"Window Size : {window_size}\n")
-
-    report.write(f"Windows : {num_windows}\n")
-
-    report.write(f"Features : {features.shape[1]}\n")
+    report.write(f"Input File      : {input_file}\n")
+    report.write(f"Output File     : {output_file}\n")
+    report.write(f"Window Size     : {window_size}\n")
+    report.write(f"Number Windows  : {num_windows}\n")
+    report.write(f"Output Features : {features_df.shape[1]}\n")
+    report.write(f"Feature Matrix  : {features_df.shape}\n")
 
 print("\nReport Saved.")
 

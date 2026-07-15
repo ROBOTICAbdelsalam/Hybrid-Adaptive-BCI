@@ -1,0 +1,11 @@
+Lab14.6 - Real-Time System Evaluation
+============================================================
+
+            Metric   Value
+ Total Predictions  5.0000
+ Executed Commands  3.0000
+ Rejected Commands  2.0000
+Execution Rate (%) 60.0000
+Average Confidence  0.7450
+Maximum Confidence  0.7646
+Minimum Confidence  0.7213

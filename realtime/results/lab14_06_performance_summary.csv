@@ -1,0 +1,8 @@
+Metric,Value
+Total Predictions,5.0
+Executed Commands,3.0
+Rejected Commands,2.0
+Execution Rate (%),60.0
+Average Confidence,0.745
+Maximum Confidence,0.7646
+Minimum Confidence,0.7213
