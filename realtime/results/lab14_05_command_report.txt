@@ -1,0 +1,11 @@
+Lab14.5 - Real-Time Decision Making
+============================================================
+
+Confidence Threshold : 0.75
+
+ Prediction  Confidence   Command
+          2    0.764646     RIGHT
+          2    0.721315 NO ACTION
+          2    0.751487     RIGHT
+          2    0.728497 NO ACTION
+          2    0.758895     RIGHT
