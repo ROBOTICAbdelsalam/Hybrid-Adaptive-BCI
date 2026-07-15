@@ -84,3 +84,22 @@ print("\nCurrent Feedback Database\n")
 print(feedback_data.tail())
 
 print("\nLab13.1 Finished Successfully.")
+# --------------------------------------------------
+# Save Report
+# --------------------------------------------------
+
+with open(
+    "results/lab13_01_user_feedback_report.txt",
+    "w",
+    encoding="utf-8"
+) as report:
+
+    report.write("Lab13.1 - User Feedback Integration\n")
+    report.write("=" * 60 + "\n\n")
+
+    report.write(f"Predicted Command : {predicted_command}\n")
+    report.write(f"Confidence        : {confidence:.2f}\n")
+    report.write(f"User Feedback     : {feedback}\n")
+    report.write(f"Correct           : {correct}\n")
+
+print("Report Saved.")
