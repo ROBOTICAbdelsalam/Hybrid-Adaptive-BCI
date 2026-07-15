@@ -1,0 +1,45 @@
+Chapter 14 - Real-Time BCI System Report
+======================================================================
+
+SYSTEM OVERVIEW
+----------------------------------------------------------------------
+This report summarizes the complete real-time Brain-Computer
+Interface pipeline developed in Chapter 14.
+
+Completed Stages
+------------------------------
+1. Live EEG Streaming
+2. Signal Preprocessing
+3. Feature Extraction
+4. Deep Learning Prediction
+5. Decision Making
+6. Performance Evaluation
+
+PERFORMANCE SUMMARY
+----------------------------------------------------------------------
+            Metric   Value
+ Total Predictions  5.0000
+ Executed Commands  3.0000
+ Rejected Commands  2.0000
+Execution Rate (%) 60.0000
+Average Confidence  0.7450
+Maximum Confidence  0.7646
+Minimum Confidence  0.7213
+
+PREDICTION RESULTS
+----------------------------------------------------------------------
+ Prediction  Confidence
+          2    0.764646
+          2    0.721315
+          2    0.751487
+          2    0.728497
+          2    0.758895
+
+GENERATED COMMANDS
+----------------------------------------------------------------------
+ Prediction  Confidence   Command
+          2    0.764646     RIGHT
+          2    0.721315 NO ACTION
+          2    0.751487     RIGHT
+          2    0.728497 NO ACTION
+          2    0.758895     RIGHT
