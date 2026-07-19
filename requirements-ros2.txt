@@ -1,0 +1,40 @@
+# ROS2 build tooling (Chapter 15 — ROS2 Integration)
+#
+# These packages come from a ROS2 workspace environment and are normally
+# installed through the ROS2 distribution and rosdep, NOT through this file:
+#
+#   https://docs.ros.org/en/humble/Installation.html
+#
+# They are recorded here only to document the environment that produced the
+# ros2_workspace/. None of them are imported by the lab scripts, so they are
+# kept out of the main requirements.txt to preserve a reproducible runtime.
+
+argcomplete==3.5.3
+catkin-pkg==1.0.0
+colcon-argcomplete==0.3.3
+colcon-bash==0.5.0
+colcon-cd==0.1.1
+colcon-cmake==0.2.29
+colcon-defaults==0.2.9
+colcon-devtools==0.3.0
+colcon-library-path==0.2.1
+colcon-metadata==0.2.5
+colcon-notification==0.3.0
+colcon-output==0.2.13
+colcon-package-information==0.4.0
+colcon-package-selection==0.2.10
+colcon-parallel-executor==0.3.0
+colcon-pkg-config==0.1.0
+colcon-powershell==0.4.0
+colcon-python-setup-py==0.2.9
+colcon-recursive-crawl==0.2.3
+colcon-ros==0.5.0
+colcon-test-result==0.3.8
+colcon-zsh==0.5.0
+distlib==0.3.9
+distro==1.9.0
+docutils==0.21.2
+empy==4.2
+rosdep==0.25.1
+rosdistro==1.0.1
+rospkg==1.5.1
