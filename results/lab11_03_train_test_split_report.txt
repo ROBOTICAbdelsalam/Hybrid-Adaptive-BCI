@@ -3,4 +3,5 @@ Lab11.3 - Train/Test Split
 
 Training Samples : 23
 Testing Samples  : 6
-Features         : 4
+CSP Features     : 4
+CSP fitted on training data only (no test-set leakage).

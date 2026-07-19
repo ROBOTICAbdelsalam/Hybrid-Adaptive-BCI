@@ -1,10 +1,10 @@
 Lab11.9 - Final Model
 ============================================================
 
-Model: SVM
-Accuracy: 0.8333
-Precision: 0.7083
-Recall: 0.8333
-F1 Score: 0.7619
+Model: Random Forest
+Accuracy: 0.5
+Precision: 0.25
+Recall: 0.5
+F1 Score: 0.3333
 Dataset: EEGBCI Subject 01 Run 04
 Feature Extraction: Common Spatial Patterns (CSP)

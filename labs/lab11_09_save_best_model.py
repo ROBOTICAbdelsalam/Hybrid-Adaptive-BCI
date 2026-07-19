@@ -17,9 +17,9 @@ os.makedirs("results", exist_ok=True)
 # Select Best Model
 # --------------------------------------------------
 
-best_model_name = "SVM"
+best_model_name = "Random Forest"
 
-source_model = "models/svm_classifier.pkl"
+source_model = "models/random_forest_classifier.pkl"
 destination_model = "final_model/final_bci_model.pkl"
 
 shutil.copy(source_model, destination_model)
@@ -46,10 +46,10 @@ if os.path.exists(encoder_path):
 
 metadata = {
     "Model": best_model_name,
-    "Accuracy": 0.8333,
-    "Precision": 0.7083,
-    "Recall": 0.8333,
-    "F1 Score": 0.7619,
+    "Accuracy": 0.5000,
+    "Precision": 0.2500,
+    "Recall": 0.5000,
+    "F1 Score": 0.3333,
     "Dataset": "EEGBCI Subject 01 Run 04",
     "Feature Extraction": "Common Spatial Patterns (CSP)"
 }
