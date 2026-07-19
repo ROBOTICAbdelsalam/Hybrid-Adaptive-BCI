@@ -2,8 +2,8 @@ Lab12.5 - Deep Learning Model Comparison
 ============================================================
 
    Model  Accuracy  Precision  Recall  F1 Score
-     CNN       1.0       1.00     1.0    1.0000
-    LSTM       0.5       0.25     0.5    0.3333
-CNN-LSTM       1.0       1.00     1.0    1.0000
+     CNN    0.5000     0.4444  0.5000    0.4667
+    LSTM    0.5000     0.3333  0.5000    0.3968
+CNN-LSTM    0.6667     0.6667  0.6667    0.6667
 
-Best Model : CNN
+Best Model : CNN-LSTM

@@ -21,6 +21,8 @@ from tensorflow.keras.callbacks import (
 
 from tensorflow.keras.utils import to_categorical
 
+from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -52,11 +54,29 @@ y_test = np.load("dl_data/y_test.npy")
 
 num_classes = len(np.unique(y_train))
 
+# --------------------------------------------------
+# Validation Split
+#
+# The validation set is held out from the training
+# data so that the test set is never seen during
+# training or model selection.
+# --------------------------------------------------
+
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train,
+    y_train,
+    test_size=0.20,
+    random_state=42,
+    stratify=y_train
+)
+
 y_train_cat = to_categorical(y_train, num_classes)
+y_val_cat = to_categorical(y_val, num_classes)
 y_test_cat = to_categorical(y_test, num_classes)
 
-print("Training Shape :", X_train.shape)
-print("Testing Shape  :", X_test.shape)
+print("Training Shape   :", X_train.shape)
+print("Validation Shape :", X_val.shape)
+print("Testing Shape    :", X_test.shape)
 
 # --------------------------------------------------
 # CNN-LSTM Model
@@ -129,7 +149,7 @@ history = model.fit(
     X_train,
     y_train_cat,
 
-    validation_data=(X_test, y_test_cat),
+    validation_data=(X_val, y_val_cat),
 
     epochs=100,
 

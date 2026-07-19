@@ -1,10 +1,10 @@
 Lab12.3 - LSTM Classifier
 ============================================================
 
-Training Samples : 23
+Training Samples : 18
 Testing Samples  : 6
 
 Accuracy : 0.5000
-Precision: 0.2500
+Precision: 0.3333
 Recall   : 0.5000
-F1 Score : 0.3333
+F1 Score : 0.3968

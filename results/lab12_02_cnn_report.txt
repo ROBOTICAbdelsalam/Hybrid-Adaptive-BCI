@@ -1,10 +1,10 @@
 Lab12.2 - CNN Classifier
 ============================================================
 
-Training Samples : 23
+Training Samples : 18
 Testing Samples  : 6
 
-Accuracy : 1.0000
-Precision: 1.0000
-Recall   : 1.0000
-F1 Score : 1.0000
+Accuracy : 0.5000
+Precision: 0.4444
+Recall   : 0.5000
+F1 Score : 0.4667

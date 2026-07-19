@@ -7,6 +7,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv1D, MaxPooling1D, Flatten, Dense
 from tensorflow.keras.utils import to_categorical
 
+from sklearn.model_selection import train_test_split
+
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -39,16 +41,34 @@ X_test = np.load("dl_data/X_test.npy")
 y_train = np.load("dl_data/y_train.npy")
 y_test = np.load("dl_data/y_test.npy")
 
-print("Training Shape :", X_train.shape)
-print("Testing Shape  :", X_test.shape)
+num_classes = len(np.unique(y_train))
+
+# --------------------------------------------------
+# Validation Split
+#
+# The validation set is held out from the training
+# data so that the test set is never seen during
+# training or model selection.
+# --------------------------------------------------
+
+X_train, X_val, y_train, y_val = train_test_split(
+    X_train,
+    y_train,
+    test_size=0.20,
+    random_state=42,
+    stratify=y_train
+)
+
+print("Training Shape   :", X_train.shape)
+print("Validation Shape :", X_val.shape)
+print("Testing Shape    :", X_test.shape)
 
 # --------------------------------------------------
 # One-Hot Encoding
 # --------------------------------------------------
 
-num_classes = len(np.unique(y_train))
-
 y_train_cat = to_categorical(y_train, num_classes)
+y_val_cat = to_categorical(y_val, num_classes)
 y_test_cat = to_categorical(y_test, num_classes)
 
 # --------------------------------------------------
@@ -103,7 +123,7 @@ model.summary()
 history = model.fit(
     X_train,
     y_train_cat,
-    validation_data=(X_test, y_test_cat),
+    validation_data=(X_val, y_val_cat),
     epochs=50,
     batch_size=8,
     verbose=1

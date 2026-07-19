@@ -3,8 +3,8 @@ Lab12.6 - Performance Evaluation
 
 Best Deep Learning Model
 
-Model        CNN
-Accuracy     1.0
-Precision    1.0
-Recall       1.0
-F1 Score     1.0
+Model        CNN-LSTM
+Accuracy       0.6667
+Precision      0.6667
+Recall         0.6667
+F1 Score       0.6667
