@@ -38,25 +38,45 @@ print(f"Current Feedback Accuracy : {accuracy:.2f}")
 
 # --------------------------------------------------
 # Adaptive Threshold
+#
+# The threshold decides which predictions are allowed
+# to become robot commands.
+#
+# A classifier that is performing well can be trusted,
+# so the gate is relaxed and the interface becomes
+# more responsive.
+#
+# A classifier that is performing poorly must be
+# distrusted, so the gate is raised and only very
+# confident predictions may actuate the robot.
+# Uncertainty therefore produces inaction rather
+# than a wrong action.
 # --------------------------------------------------
 
-threshold = 0.80
+MINIMUM_SAMPLES = 10
 
-if accuracy >= 0.90:
+if len(feedback) < MINIMUM_SAMPLES:
+
+    # Too little feedback to trust the accuracy
+    # estimate, so remain conservative.
 
     threshold = 0.90
 
+elif accuracy >= 0.90:
+
+    threshold = 0.70
+
 elif accuracy >= 0.75:
-
-    threshold = 0.85
-
-elif accuracy >= 0.60:
 
     threshold = 0.80
 
+elif accuracy >= 0.60:
+
+    threshold = 0.85
+
 else:
 
-    threshold = 0.70
+    threshold = 0.90
 
 print(f"\nNew Adaptive Threshold : {threshold:.2f}")
 
