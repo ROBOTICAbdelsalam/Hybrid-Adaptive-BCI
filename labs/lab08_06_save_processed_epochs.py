@@ -2,6 +2,7 @@ import os
 import shutil
 import mne
 from mne.datasets import eegbci
+from mne.preprocessing import ICA
 
 print("=" * 60)
 print("Lab 08.6 - Save Processed Epochs")
@@ -22,6 +23,45 @@ runs = [4]
 files = eegbci.load_data(subject, runs)
 
 raw = mne.io.read_raw_edf(files[0], preload=True)
+
+# --------------------------------------------------
+# Band-pass Filter (1-40 Hz) - matches Lab 06
+#
+# Applied to the continuous signal before epoching so
+# that filter edge effects fall outside the epochs.
+# --------------------------------------------------
+raw.filter(l_freq=1.0, h_freq=40.0)
+
+# --------------------------------------------------
+# ICA Artifact Removal - matches Lab 07.6
+#
+# ICA is fitted on the filtered continuous signal.
+# Artifact components are detected automatically from
+# EOG channels when present. The EEGBCI dataset has no
+# dedicated EOG channel, so no component is excluded
+# here, but the step keeps the pipeline correct for
+# recordings that do contain artifact channels.
+# --------------------------------------------------
+ica = ICA(
+    n_components=20,
+    random_state=42,
+    method="fastica"
+)
+
+ica.fit(raw)
+
+detected_components = []
+
+eog_channels = mne.pick_types(raw.info, eog=True)
+
+if len(eog_channels) > 0:
+    detected_components, _ = ica.find_bads_eog(raw)
+
+ica.exclude = detected_components
+
+ica.apply(raw)
+
+print(f"ICA excluded components : {detected_components}")
 
 events, event_id = mne.events_from_annotations(raw)
 
