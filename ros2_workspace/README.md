@@ -54,9 +54,36 @@ interfaces resolve — the per-phase "build, run, verify" loop.
 | Package | Type | Purpose |
 |---------|------|---------|
 | `bci_interfaces` | ament_cmake | Robot-independent gesture messages/services (the contract) |
+| `bci_robot_abstraction` | ament_python | `RobotInterface` contract + registry + `robot_node`; robot-independent core |
+| `bci_bridge` | ament_python | Reads Lab 13/14 outputs, publishes `BCICommand` |
+| `bci_hand_description` | ament_cmake | Hand URDF/Xacro, ros2_control, Gazebo launch |
+| `bci_hand_moveit_config` | ament_cmake | MoveIt2 config + six named gesture states |
+| `bci_bringup` | ament_python | Hand trajectory adapter + full system launch |
 
-*(further packages — abstraction layer, bridge, hand description, bringup —
-are added in subsequent phases.)*
+## Run the complete system
+
+```bash
+# full pipeline: (demo) predictions -> bridge -> abstraction -> hand -> Gazebo
+ros2 launch bci_bringup bci_system.launch.py
+
+# replay the real Lab 14 predictions instead of the bundled demo data:
+ros2 launch bci_bringup bci_system.launch.py \
+    predictions_csv:=/path/to/realtime/results/realtime_predictions.csv \
+    threshold_csv:=/path/to/adaptive_ai/adaptive_threshold.csv
+
+# MoveIt2 planning demo (RViz):
+ros2 launch bci_hand_moveit_config demo.launch.py
+```
+
+## Data flow
+
+```
+EEG → AI (Labs 01-14) → realtime_predictions.csv
+    → bridge_node        /bci/command        (BCICommand)
+    → robot_node         /bci/joint_targets  (normalised) + /bci/robot_state
+    → hand_adapter       /hand_controller/joint_trajectory (radians)
+    → Gazebo Harmonic robotic hand
+```
 
 ## Supported gestures
 
