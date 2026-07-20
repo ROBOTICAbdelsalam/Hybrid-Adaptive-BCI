@@ -1,0 +1,10 @@
+# Parameters for the AI -> ROS2 bridge node.
+#
+# Paths are relative to where the node is launched (the repo root by default).
+# Both files are produced by the existing pipeline and are read unmodified.
+bci_bridge_node:
+  ros__parameters:
+    predictions_csv: "realtime/results/realtime_predictions.csv"  # Lab 14.4
+    threshold_csv: "adaptive_ai/adaptive_threshold.csv"           # Lab 13.2
+    publish_period_sec: 1.0
+    loop: true
