@@ -1,0 +1,12 @@
+# Tells MoveItConfigsBuilder where the URDF (in the description package) and
+# the SRDF (here) live, so demo/move_group launches auto-discover them.
+moveit_setup_assistant_config:
+  urdf:
+    package: bci_hand_description
+    relative_path: urdf/bci_hand.urdf.xacro
+    xacro_args: "controllers_config:="
+  srdf:
+    relative_path: config/bci_hand.srdf
+  package_settings:
+    author_name: Mohamed Abdelsalam
+    author_email: alexlavander7@gmail.com

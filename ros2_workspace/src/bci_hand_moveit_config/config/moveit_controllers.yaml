@@ -1,0 +1,16 @@
+# Maps MoveIt to the ros2_control hand_controller (FollowJointTrajectory).
+moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControllerManager
+
+moveit_simple_controller_manager:
+  controller_names:
+    - hand_controller
+  hand_controller:
+    type: FollowJointTrajectory
+    action_ns: follow_joint_trajectory
+    default: true
+    joints:
+      - thumb_joint
+      - index_joint
+      - middle_joint
+      - ring_joint
+      - little_joint

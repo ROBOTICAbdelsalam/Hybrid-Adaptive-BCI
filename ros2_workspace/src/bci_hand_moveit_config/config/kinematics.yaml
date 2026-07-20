@@ -1,0 +1,3 @@
+# The "hand" planning group is a joint group (no IK chain), so no kinematics
+# solver is required. Kept for MoveItConfigsBuilder discovery.
+hand: {}

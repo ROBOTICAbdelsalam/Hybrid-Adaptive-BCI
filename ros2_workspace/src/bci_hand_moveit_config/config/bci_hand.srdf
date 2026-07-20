@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Semantic Robot Description for the BCI robotic hand.
+
+  Planning group "hand" is a JOINT group over the five finger joints (no IK
+  chain needed). The six group_states are the BCI gestures; each joint value
+  is the abstraction-layer normalised flexion multiplied by the URDF joint
+  limit (1.4 rad). A consistency test enforces this relationship, so the
+  gesture definitions cannot drift between the abstraction, the URDF and here.
+-->
+<robot name="bci_hand">
+
+  <group name="hand">
+    <joint name="thumb_joint"/>
+    <joint name="index_joint"/>
+    <joint name="middle_joint"/>
+    <joint name="ring_joint"/>
+    <joint name="little_joint"/>
+  </group>
+
+  <!-- Gesture: REST (normalised 0.2 -> 0.28 rad) -->
+  <group_state name="rest" group="hand">
+    <joint name="thumb_joint" value="0.28"/>
+    <joint name="index_joint" value="0.28"/>
+    <joint name="middle_joint" value="0.28"/>
+    <joint name="ring_joint" value="0.28"/>
+    <joint name="little_joint" value="0.28"/>
+  </group_state>
+
+  <!-- Gesture: OPEN_HAND (0.0 -> 0.0 rad) -->
+  <group_state name="open_hand" group="hand">
+    <joint name="thumb_joint" value="0.0"/>
+    <joint name="index_joint" value="0.0"/>
+    <joint name="middle_joint" value="0.0"/>
+    <joint name="ring_joint" value="0.0"/>
+    <joint name="little_joint" value="0.0"/>
+  </group_state>
+
+  <!-- Gesture: CLOSE_HAND (1.0 -> 1.4 rad) -->
+  <group_state name="close_hand" group="hand">
+    <joint name="thumb_joint" value="1.4"/>
+    <joint name="index_joint" value="1.4"/>
+    <joint name="middle_joint" value="1.4"/>
+    <joint name="ring_joint" value="1.4"/>
+    <joint name="little_joint" value="1.4"/>
+  </group_state>
+
+  <!-- Gesture: PINCH_GRIP (thumb+index closed, others open) -->
+  <group_state name="pinch_grip" group="hand">
+    <joint name="thumb_joint" value="1.4"/>
+    <joint name="index_joint" value="1.4"/>
+    <joint name="middle_joint" value="0.0"/>
+    <joint name="ring_joint" value="0.0"/>
+    <joint name="little_joint" value="0.0"/>
+  </group_state>
+
+  <!-- Gesture: POWER_GRIP (0.9 -> 1.26 rad) -->
+  <group_state name="power_grip" group="hand">
+    <joint name="thumb_joint" value="1.26"/>
+    <joint name="index_joint" value="1.26"/>
+    <joint name="middle_joint" value="1.26"/>
+    <joint name="ring_joint" value="1.26"/>
+    <joint name="little_joint" value="1.26"/>
+  </group_state>
+
+  <!-- Gesture: POINT (index extended, others closed) -->
+  <group_state name="point" group="hand">
+    <joint name="thumb_joint" value="1.4"/>
+    <joint name="index_joint" value="0.0"/>
+    <joint name="middle_joint" value="1.4"/>
+    <joint name="ring_joint" value="1.4"/>
+    <joint name="little_joint" value="1.4"/>
+  </group_state>
+
+  <!-- Fingers are attached to the palm; disable adjacent-link collisions. -->
+  <disable_collisions link1="palm" link2="thumb_link" reason="Adjacent"/>
+  <disable_collisions link1="palm" link2="index_link" reason="Adjacent"/>
+  <disable_collisions link1="palm" link2="middle_link" reason="Adjacent"/>
+  <disable_collisions link1="palm" link2="ring_link" reason="Adjacent"/>
+  <disable_collisions link1="palm" link2="little_link" reason="Adjacent"/>
+  <disable_collisions link1="thumb_link" link2="index_link" reason="Never"/>
+  <disable_collisions link1="index_link" link2="middle_link" reason="Never"/>
+  <disable_collisions link1="middle_link" link2="ring_link" reason="Never"/>
+  <disable_collisions link1="ring_link" link2="little_link" reason="Never"/>
+  <disable_collisions link1="thumb_link" link2="middle_link" reason="Never"/>
+  <disable_collisions link1="thumb_link" link2="ring_link" reason="Never"/>
+  <disable_collisions link1="thumb_link" link2="little_link" reason="Never"/>
+  <disable_collisions link1="index_link" link2="ring_link" reason="Never"/>
+  <disable_collisions link1="index_link" link2="little_link" reason="Never"/>
+  <disable_collisions link1="middle_link" link2="little_link" reason="Never"/>
+
+</robot>
