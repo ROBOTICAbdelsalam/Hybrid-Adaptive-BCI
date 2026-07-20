@@ -4,49 +4,58 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## Version 0.7.0 (Current)
+## Version 1.0.0 — Hybrid Adaptive BCI Robotic Hand System
 
-### Added
+First complete release: an end-to-end pipeline from EEG motor-imagery to a simulated
+robotic hand, through a robot-independent ROS2 architecture.
 
-- Project structure
-- README documentation
-- GitHub badges
-- MIT License
-- Requirements file
-- .gitignore
+### Scientific pipeline — corrections (branch `scientific-fixes`)
 
-### Completed Laboratories
+- **A4** — `processed_data/` now contains genuinely filtered + ICA-cleaned epochs
+  (previously raw data saved under a "processed" name).
+- **A2** — CSP is fit on the training split only; test-set leakage removed.
+- **A3** — a stratified validation set is held out from training in all deep-learning
+  labs; the test set is used only for final scoring.
+- **A5** — adaptive confidence threshold direction corrected (low accuracy ⇒ more
+  conservative gate) with a cold-start guard.
+- **A1** — `requirements.txt` made reproducible: removed the invalid local wheel path,
+  added all runtime dependencies, pinned versions (clean-room verified).
 
-- Lab 01 – Environment Setup
-- Lab 02 – EEG Dataset Loading
-- Lab 03 – EDF File Reading
-- Lab 04 – Raw EEG Visualization
-- Lab 05 – Dataset Inspection
-- Lab 06 – EEG Filtering
-- Lab 07.1 – ICA Training
-- Lab 07.2 – ICA Components Visualization
-- Lab 07.3 – Manual Component Selection
-- Lab 07.4 – Automatic Component Detection
-- Lab 07.5 – Manual Artifact Removal
-- Lab 07.6 – Automatic Artifact Removal
-- Lab 07.7 – Before vs After Comparison
+### ROS2 integration (branch `ros2-integration`)
 
-### Generated Outputs
+- **Phase 1** — reproducible ROS2 Jazzy environment (Dockerfile + RunPod bootstrap +
+  build/verify script) and `bci_interfaces` (robot-independent gesture contract).
+- **Phase 2** — `bci_robot_abstraction` (RobotInterface + registry + `robot_node`) and
+  `bci_bridge` (consumes existing Lab 13/14 outputs, publishes `BCICommand`).
+- **Phase 3** — `bci_hand_description`: five-finger hand URDF/Xacro, `ros2_control`,
+  Gazebo Harmonic launch.
+- **Phase 4** — `bci_hand_moveit_config`: MoveIt2 planning group + six named gesture
+  states, with a cross-package consistency test.
+- **Phase 5** — `bci_bringup`: hand trajectory adapter + full-system launch
+  (EEG predictions → bridge → abstraction → hand → Gazebo).
 
-- EEG Figures
-- ICA Components
-- ICA Sources
-- Cleaned EEG
-- Reports
+### Release engineering
+
+- All six ROS2 packages versioned 1.0.0.
+- 33 unit/structural tests; AI pipeline smoke-tested; URDF/SRDF consistency verified.
+- Documentation set: README, ARCHITECTURE, USER_GUIDE, PROJECT_REPORT.
+- Removed stray placeholder directories and dead code.
+
+### Verified
+
+- AI pipeline (CSP + deployed model), all pure-logic and structural tests on the dev
+  host. `colcon build`, Gazebo and MoveIt2 runtime on a ROS2 Jazzy host — see the
+  verification matrix in `docs/PROJECT_REPORT.md`.
 
 ---
 
-## Upcoming (Version 0.8.0)
+## Version 0.7.0
 
-- Lab 08.1 – Epoch Creation
-- Lab 08.2 – Event Extraction
-- Lab 08.3 – Baseline Correction
-- Lab 08.4 – Epoch Visualization
-- Lab 08.5 – Epoch Quality Check
-- Lab 08.6 – Save Epochs
-- Lab 08.7 – Summary Report
+### Added
+
+- Project structure, README, GitHub badges, MIT License, requirements, .gitignore.
+
+### Completed Laboratories
+
+- Labs 01–07: environment setup, EEG loading, EDF reading, visualization, dataset
+  inspection, filtering, and the full ICA artifact-removal sub-labs (07.1–07.7).

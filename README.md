@@ -1,391 +1,145 @@
-# Hybrid-Adaptive-BCI
+# Hybrid Adaptive BCI — Robotic Hand Control System
 
-![Python](https://img.shields.io/badge/Python-3.13-blue?logo=python)
-![MNE](https://img.shields.io/badge/MNE-Python-green)
-![ROS2](https://img.shields.io/badge/ROS2-Humble-blue)
-![Status](https://img.shields.io/badge/Status-Active-success)
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
+![ROS2](https://img.shields.io/badge/ROS2-Jazzy-blue)
+![Gazebo](https://img.shields.io/badge/Gazebo-Harmonic-orange)
+![MoveIt2](https://img.shields.io/badge/MoveIt-2-green)
+![Version](https://img.shields.io/badge/Release-v1.0-success)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Hybrid Brain–Computer Interface (BCI) with Adaptive Artificial Intelligence for Controlling Industrial Robots and Medical Assistive Devices.
+A Hybrid Brain–Computer Interface (BCI) with adaptive AI that turns EEG motor-imagery
+into commands for a simulated **robotic hand**, through a **robot-independent** ROS2
+architecture designed so industrial arms (Franka Panda, KUKA iiwa, UR5e) can be added
+later without changing any EEG or AI code.
+
+> Master's Thesis in Robotics — JAMK University of Applied Sciences, Finland.
+> Author: **Mohamed Abdelsalam** · Supervisor: **Prof. Olli Väänänen**
 
 ---
 
-# Project Overview
+## What this project is
 
-This project is part of my Master's Thesis in Robotics at JAMK University of Applied Sciences.
+The system is an end-to-end pipeline from brain signal to robot motion:
 
-The objective is to develop a Hybrid Brain–Computer Interface (BCI) system supported by Adaptive Artificial Intelligence for controlling industrial robots and medical assistive devices using EEG signals.
-
----
-
-# Table of Contents
-
-- Project Overview
-- Project Objectives
-- Technologies
-- Installation
-- Project Structure
-- Main Python Libraries
-- Completed Labs
-- Current Progress
-- Project Pipeline
-- Future Work
-- Author
-- Supervisor
-- License
-
----
-
-# Project Objectives
-
-- EEG Signal Processing
-- EEG Preprocessing
-- Noise Removal
-- Artifact Removal
-- Feature Extraction
-- Machine Learning
-- Deep Learning
-- Adaptive Artificial Intelligence
-- ROS2 Integration
-- Industrial Robot Control
-- Medical Assistive Devices
-
----
-
-# Technologies
-
-- Python
-- MNE-Python
-- NumPy
-- SciPy
-- Matplotlib
-- Scikit-learn
-- BrainFlow
-- TensorFlow
-- PyTorch
-- ROS2
-
----
-# Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/ROBOTICAbdelsalam/Hybrid-Adaptive-BCI.git
+```
+EEG  →  Preprocessing  →  Feature Extraction (CSP)  →  AI Model (CNN/LSTM)
+     →  Real-Time Prediction  →  ROS2 Bridge  →  Robot Abstraction Layer
+     →  Robotic Hand (Gazebo Harmonic + MoveIt2)
 ```
 
-Move to the project folder
+- **Labs 01–14** (Python) implement the neuroscience/AI half: EEG loading, filtering,
+  ICA, epoching, feature extraction, Common Spatial Patterns, classical ML, deep
+  learning, adaptive AI, and a real-time prediction/command pipeline.
+- **`ros2_workspace/`** implements the robotics half: six ROS2 Jazzy packages providing
+  the interface contract, a robot-independent abstraction layer, the AI→ROS2 bridge,
+  the robotic-hand description + Gazebo simulation, MoveIt2 configuration, and a full
+  bringup launch.
 
-```bash
-cd Hybrid-Adaptive-BCI
-```
-
-Install all dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-
+The two halves meet at one seam — the bridge reads the existing pipeline's output
+files — so the AI code is never modified by the robotics code.
 
 ---
 
-# Project Structure
+## Documentation
+
+| Guide | Contents |
+|-------|----------|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | System architecture, data flow, robot-abstraction design, diagrams |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md) | Installation, build, run, ROS2 / Gazebo / MoveIt2 execution, testing, troubleshooting |
+| [docs/PROJECT_REPORT.md](docs/PROJECT_REPORT.md) | Performance report, scientific validation, software-engineering & robotics summaries, future work |
+| [ros2_workspace/README.md](ros2_workspace/README.md) | ROS2 workspace quick reference |
+| `docs/Lab*.md` | Per-lab documentation for the EEG/AI pipeline |
+
+---
+
+## Repository structure
 
 ```text
-Hybrid-Adaptive-BCI
+Hybrid-Adaptive-BCI/
+├── labs/                     # Labs 01–14: EEG → AI → real-time prediction (Python)
+├── processed_data/           # Filtered + ICA-cleaned epochs (subject 1, run 4)
+├── csp/                      # CSP models + features
+├── ml_data/  dl_data/        # ML / DL train-test splits
+├── models/  final_model/     # Trained SVM/RF/XGBoost/CNN-LSTM + deployed model
+├── adaptive_ai/              # Adaptive threshold + feedback (Lab 13)
+├── realtime/                 # Real-time streaming, prediction, command outputs (Lab 14)
+├── results/  figures/        # Reports and plots
+├── docs/                     # Documentation (guides + per-lab)
 │
-├── datasets
-├── deep_learning
-├── docs
-├── feature_extraction
-├── figures
-├── labs
-├── machine_learning
-├── preprocessing
-├── prototype
-├── results
-├── ros2
-├── README.md
-├── requirements.txt
-├── LICENSE
-└── .gitignore
+├── ros2_workspace/           # ROS2 Jazzy integration
+│   ├── docker/               # Dockerfile + RunPod bootstrap + build/verify script
+│   └── src/
+│       ├── bci_interfaces/          # msgs/srv: robot-independent gesture contract
+│       ├── bci_robot_abstraction/   # RobotInterface + registry + robot_node
+│       ├── bci_bridge/              # AI predictions → ROS2 BCICommand
+│       ├── bci_hand_description/     # URDF/Xacro + ros2_control + Gazebo launch
+│       ├── bci_hand_moveit_config/  # MoveIt2 config + 6 named gesture states
+│       └── bci_bringup/             # Hand adapter + full system launch
+│
+├── requirements.txt          # Python (AI pipeline) dependencies
+├── requirements-ros2.txt     # ROS2 build tooling (installed via the ROS2 distro)
+├── CHANGELOG.md  LICENSE
 ```
 
 ---
 
-# Main Python Libraries
+## Supported gestures
 
-- MNE
-- NumPy
-- SciPy
-- Matplotlib
-- Scikit-learn
-- BrainFlow
-- TensorFlow
-- PyTorch
+`REST` · `OPEN_HAND` · `CLOSE_HAND` · `PINCH_GRIP` · `POWER_GRIP` · `POINT`
+
+Defined once in `bci_interfaces/msg/BCICommand.msg` and mapped per-robot by each
+abstraction layer, so they are robot-independent by construction.
 
 ---
 
-# Completed Labs
+## Quick start
 
-## Lab 01 – Environment Setup
+### 1. AI pipeline (macOS / Linux)
 
-Python environment preparation and project configuration.
-
----
-
-## Lab 02 – EEG Dataset Loading
-
-Loading the EEGBCI dataset using MNE-Python.
-
----
-
-## Lab 03 – EDF File Reading
-
-Reading EEG recordings from EDF files.
-
----
-
-## Lab 04 – Raw EEG Visualization
-
-Visualizing raw EEG signals.
-
-**Outputs**
-
-- Raw EEG Figure
-
----
-
-## Lab 05 – Dataset Inspection
-
-Inspecting EEG recording information.
-
-**Outputs**
-
-- Dataset Information Report
-
----
-
-## Lab 06 – EEG Filtering
-
-Applying a 1–40 Hz Band-pass filter to improve EEG signal quality.
-
-**Outputs**
-
-- Filtered EEG Figure
-- Filtering Report
-
----
-
-## Lab 07 – Independent Component Analysis (ICA)
-
-### Lab 07.1 – ICA Training
-
-Training the FastICA model.
-
-### Lab 07.2 – ICA Components Visualization
-
-Visualizing ICA components.
-
-### Lab 07.3 – Manual Component Selection
-
-Manual identification of artifact-related ICA components.
-
-### Lab 07.4 – Automatic Component Detection
-
-Automatic artifact detection using EOG channels (when available).
-
-### Lab 07.5 – Manual Artifact Removal
-
-Removing selected ICA components manually.
-
-### Lab 07.6 – Automatic Artifact Removal
-
-Automatic ICA artifact removal.
-
-### Lab 07.7 – Before vs After Comparison
-
-Comparison between original EEG and cleaned EEG signals.
-
-**Outputs**
-
-- ICA Components
-- ICA Sources
-- Cleaned EEG
-- Comparison Figures
-- Reports
-
----
-# Sample Results
-
-## ICA Components
-
-![ICA Components](figures/lab07_ica_components_page_1.png)
-
----
-
-## Original EEG
-
-![Original EEG](figures/lab07_original_eeg.png)
-
----
-
-## Manual ICA Artifact Removal
-
-![Manual ICA](figures/lab07_manual_cleaned_eeg.png)
-
----
-
-## Clean EEG
-
-![Clean EEG](figures/lab07_cleaned_eeg.png)
-
-# Current Progress
-
-## Completed
-
-- ✅ Lab 01
-- ✅ Lab 02
-- ✅ Lab 03
-- ✅ Lab 04
-- ✅ Lab 05
-- ✅ Lab 06
-- ✅ Lab 07
-
-## Current Stage
-
-🟢 EEG Preprocessing Completed
-
-## Next Milestone
-
-➡️ Lab 08 – Epoch Creation
-
----
-
-# Project Pipeline
-
-```text
-EEG Acquisition
-        │
-        ▼
-Load Dataset
-        │
-        ▼
-Filtering
-        │
-        ▼
-ICA
-        │
-        ▼
-Artifact Removal
-        │
-        ▼
-Epoch Creation
-        │
-        ▼
-Feature Extraction
-        │
-        ▼
-Machine Learning
-        │
-        ▼
-Deep Learning
-        │
-        ▼
-ROS2 Integration
-        │
-        ▼
-Industrial Robot Control
+```bash
+python3.12 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python labs/lab14_04_real_time_prediction.py   # produces realtime/results/realtime_predictions.csv
 ```
 
----
+### 2. Robotics (ROS2 Jazzy — Linux / RunPod)
 
-# Future Work
+```bash
+bash ros2_workspace/docker/setup_runpod.sh      # ROS2 Jazzy + Gazebo Harmonic + MoveIt2
+source /opt/ros/jazzy/setup.bash
+cd ros2_workspace && bash docker/build_and_verify.sh
+ros2 launch bci_bringup bci_system.launch.py    # EEG-predictions → robotic hand in Gazebo
+```
 
-Upcoming project stages:
-
-- Lab 08 – Epoch Creation
-- Lab 09 – Feature Extraction
-- Lab 10 – Machine Learning
-- Lab 11 – Deep Learning
-- Lab 12 – ROS2 Integration
-- Hybrid Adaptive BCI Prototype
-- Real-Time Robot Control
-- Thesis Publication
+Full details in [docs/USER_GUIDE.md](docs/USER_GUIDE.md).
 
 ---
 
-# Repository Status
+## Technology stack
 
-**Project Status:** 🟢 Active Development
-
-**Current Version:** v0.7.0
-
-**Latest Completed Module:** ICA Preprocessing
-
----
-
-# Author
-
-**Mohamed Abdelsalam**
-
-Master of Robotics
-
-JAMK University of Applied Sciences
-
-Finland
+| Layer | Technology |
+|-------|-----------|
+| EEG / signal processing | MNE-Python, SciPy, NumPy |
+| Feature extraction | Common Spatial Patterns (MNE) |
+| Machine learning | scikit-learn, XGBoost |
+| Deep learning | TensorFlow / Keras (CNN, LSTM, CNN-LSTM) |
+| Robotics middleware | ROS2 Jazzy |
+| Simulation | Gazebo Harmonic + `ros2_control` |
+| Motion planning | MoveIt2 |
 
 ---
 
-# Supervisor
+## Status
 
-**Prof. Olli Väänänen**
-
-JAMK University of Applied Sciences
+**v1.0 — complete.** EEG→AI→ROS2→robotic-hand pipeline implemented across six ROS2
+packages plus the Labs 01–14 AI pipeline. The AI pipeline and all ROS2 package logic
+are verified on the development host; `colcon build`, Gazebo and MoveIt2 runtime are
+verified on a ROS2 Jazzy host (see [docs/PROJECT_REPORT.md](docs/PROJECT_REPORT.md)
+for the full verification matrix).
 
 ---
 
-# License
+## Author & license
 
-This project is released under the MIT License.
-# Repository Status
-
-**Project Status:** 🟢 Active Development
-
-**Current Version:** v0.7.0
-
-**Latest Completed Module:** ICA Preprocessing
-
-**Next Module:** Epoch Creation
-Raw EEG
-      │
-      ▼
-Filtering
-      │
-      ▼
-ICA
-      │
-      ▼
-Artifact Removal
-      │
-      ▼
-Epoch Creation
-      │
-      ▼
-Feature Extraction
-      │
-      ▼
-Machine Learning
-      │
-      ▼
-Deep Learning
-      │
-      ▼
-ROS2 Integration
-      │
-      ▼
-Hybrid Adaptive BCI
-# Publications
-
-Publications related to this project will be added here after acceptance.
+**Mohamed Abdelsalam** — Master of Robotics, JAMK University of Applied Sciences.
+Supervisor: **Prof. Olli Väänänen**. Released under the **MIT License** (see `LICENSE`).

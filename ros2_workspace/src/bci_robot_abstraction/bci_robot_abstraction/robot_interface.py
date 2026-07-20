@@ -65,5 +65,4 @@ class RobotInterface(ABC):
                     f"'{gesture_library.name_of(gesture)}'"
                 ),
             )
-        result = self._plan_gesture(gesture)
-        return result
+        return self._plan_gesture(gesture)
