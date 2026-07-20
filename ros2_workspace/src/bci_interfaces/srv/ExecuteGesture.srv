@@ -1,0 +1,12 @@
+# Service exposed by every robot abstraction layer. The BCI bridge (or any
+# other client) requests a semantic gesture; the robot decides whether it
+# can execute it and reports acceptance. Motion itself runs asynchronously
+# and is reported through the RobotState topic.
+
+# Request
+uint8 gesture
+float32 confidence
+---
+# Response
+bool accepted
+string message
