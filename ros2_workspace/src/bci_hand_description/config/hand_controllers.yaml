@@ -1,0 +1,29 @@
+# ros2_control configuration for the BCI robotic hand.
+# Loaded by the gz_ros2_control plugin inside Gazebo Harmonic.
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    hand_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+hand_controller:
+  ros__parameters:
+    joints:
+      - thumb_joint
+      - index_joint
+      - middle_joint
+      - ring_joint
+      - little_joint
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_nonzero_velocity_at_trajectory_end: true
+    constraints:
+      stopped_velocity_tolerance: 0.05
+      goal_time: 0.0
