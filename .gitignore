@@ -47,3 +47,6 @@ dist/
 
 # System files
 Thumbs.db
+
+# Personal / non-project documents
+*.docx
