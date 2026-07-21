@@ -5,6 +5,7 @@
 ![Gazebo](https://img.shields.io/badge/Gazebo-Harmonic-orange)
 ![MoveIt2](https://img.shields.io/badge/MoveIt-2-green)
 ![Version](https://img.shields.io/badge/Release-v1.0-success)
+![CI](https://github.com/ROBOTICAbdelsalam/Hybrid-Adaptive-BCI/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
 
 A Hybrid Brain–Computer Interface (BCI) with adaptive AI that turns EEG motor-imagery

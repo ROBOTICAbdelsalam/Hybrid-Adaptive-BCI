@@ -6,24 +6,30 @@ Verification is split honestly by where it can be executed. The development host
 macOS (Apple Silicon); ROS2 Jazzy, Gazebo and MoveIt2 are Linux-only and are verified
 on a ROS2 Jazzy host (RunPod Ubuntu 24.04).
 
-| Item | Verified on dev host | Pending / done on ROS2 host |
-|------|:--------------------:|:---------------------------:|
-| AI pipeline: CSP transform + deployed model predict | ✅ smoke test | — |
-| Leakage-free CSP fit (train-only) | ✅ | — |
-| Validation/test separation (DL) | ✅ | — |
-| Adaptive threshold direction + cold-start | ✅ | — |
-| `requirements.txt` clean-room install | ✅ | — |
-| 33 ROS2 unit/structural tests | ✅ pytest | ✅ `colcon test` |
-| URDF expands + loads as a valid kinematic tree | ✅ yourdfpy | — |
-| SRDF ↔ abstraction ↔ URDF gesture consistency | ✅ | — |
-| End-to-end **logic** chain (prediction→gesture→radians) | ✅ | — |
-| All Python compiles; XML/YAML well-formed | ✅ | — |
-| `colcon build` (rosidl + ament) | — | ▶ ROS2 host |
-| Gazebo Harmonic spawn + controllers | — | ▶ ROS2 host |
-| MoveIt2 planning to named states | — | ▶ ROS2 host |
-| ROS transport (topics/services live) | — | ▶ ROS2 host |
+| Item | Dev host | CI (GitHub Actions) | ROS2 host (RunPod) |
+|------|:--------:|:-------------------:|:------------------:|
+| AI pipeline: CSP transform + deployed model predict | ✅ smoke | ✅ `ai-validation` | — |
+| 7 AI scientific-invariant tests (filtering, no leakage, model I/O) | ✅ pytest | ✅ | — |
+| Leakage-free CSP fit (train-only) | ✅ | ✅ | — |
+| Validation/test separation (DL) | ✅ | ✅ | — |
+| Adaptive threshold direction + cold-start | ✅ | ✅ | — |
+| `requirements.txt` clean-room install | ✅ | ✅ | — |
+| 36 ROS2 unit/structural tests | ✅ pytest | ✅ `quality` | ✅ `colcon test` |
+| Lint (pycodestyle, ≤99 cols) | proxy | ✅ `quality` | — |
+| URDF expands + loads as a valid kinematic tree | ✅ yourdfpy | ✅ | — |
+| SRDF ↔ abstraction ↔ URDF gesture consistency | ✅ | ✅ | — |
+| End-to-end **logic** chain (prediction→gesture→radians) | ✅ | ✅ | — |
+| `colcon build` (rosidl + ament) | — | ✅ `ros2-build` (ros:jazzy) | ✅ |
+| `colcon test` under ROS2 | — | ✅ `ros2-build` | ✅ |
+| Gazebo Harmonic spawn + controllers | — | — | ▶ runtime |
+| MoveIt2 planning to named states | — | — | ▶ runtime |
+| Live ROS transport (topics/services) | — | — | ▶ runtime |
+| Command→robot latency instrumentation | ✅ unit | ✅ | ▶ measured live |
 
-No build or simulation result is reported as passing unless it was actually executed.
+`colcon build`/`colcon test` now run in CI inside a `ros:jazzy` container — the build
+that cannot run on macOS is executed on every push. Only Gazebo/MoveIt2 *runtime*
+(a live simulator) remains on the ROS2 host. No build/simulation result is reported as
+passing unless it was actually executed.
 
 ## 2. Performance report
 
@@ -80,7 +86,13 @@ to exercise the full motion path. This is a data/scale limitation, not a code de
 
 - **Six ROS2 packages**, each single-purpose, versioned **1.0.0**.
 - **Separation of concerns:** decision logic in pure-Python modules (no ROS imports),
-  ROS2 nodes are thin transport wrappers. Result: **33 tests run without ROS2**.
+  ROS2 nodes are thin transport wrappers. Result: **36 ROS2 tests run without ROS2**,
+  plus **7 AI scientific-invariant tests** — 43 in total.
+- **Continuous integration:** GitHub Actions runs lint, the ROS2 logic tests, the AI
+  validation tests, and a real `colcon build`/`colcon test` in a `ros:jazzy` container
+  on every push.
+- **Diagnostics:** command→robot latency is instrumented (running min/mean/max) and
+  logged by the robot node.
 - **Single source of truth** for the gesture vocabulary, enforced by a cross-package
   consistency test (abstraction × URDF limit == SRDF named state).
 - **Reproducibility:** pinned `requirements.txt` (clean-room verified), Dockerfile +

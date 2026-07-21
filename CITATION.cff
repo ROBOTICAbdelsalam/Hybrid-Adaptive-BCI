@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: Hybrid Adaptive BCI Robotic Hand System
+message: >-
+  If you use this software or its methods, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Mohamed
+    family-names: Abdelsalam
+    affiliation: JAMK University of Applied Sciences
+version: "1.0.0"
+license: MIT
+repository-code: "https://github.com/ROBOTICAbdelsalam/Hybrid-Adaptive-BCI"
+abstract: >-
+  A Hybrid Brain-Computer Interface with adaptive AI that maps EEG motor-imagery
+  to a simulated robotic hand through a robot-independent ROS2 (Jazzy) architecture,
+  with Gazebo Harmonic simulation and MoveIt2 motion planning. Designed so
+  industrial robot arms can be added without modifying the EEG or AI pipeline.
+keywords:
+  - brain-computer interface
+  - EEG
+  - motor imagery
+  - common spatial patterns
+  - deep learning
+  - ROS2
+  - MoveIt2
+  - Gazebo
+  - robotic hand

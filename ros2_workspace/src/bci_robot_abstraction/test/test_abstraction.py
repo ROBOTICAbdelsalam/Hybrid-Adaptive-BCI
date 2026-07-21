@@ -9,6 +9,7 @@ from bci_robot_abstraction.robot_registry import available_robots, create_robot
 from bci_robot_abstraction.robotic_hand_interface import (
     RoboticHand, FINGER_JOINTS,
 )
+from bci_robot_abstraction.metrics import LatencyStats, latency_ms
 
 
 # -- gesture library --------------------------------------------------------
@@ -100,3 +101,24 @@ def test_unsupported_gesture_is_rejected_generically():
     result = NullRobot().execute_gesture(gl.id_of("REST"), 1.0)
     assert not result.accepted
     assert isinstance(result, GestureResult)
+
+
+# -- metrics ----------------------------------------------------------------
+
+def test_latency_ms_computes_positive_delta():
+    # 0.5 s later = 500 ms
+    assert abs(latency_ms(10, 0, 10, 500_000_000) - 500.0) < 1e-6
+
+
+def test_latency_ms_clamps_negative_skew():
+    assert latency_ms(10, 0, 9, 0) == 0.0
+
+
+def test_latency_stats_tracks_min_mean_max():
+    s = LatencyStats()
+    for v in (10.0, 20.0, 30.0):
+        s.update(v)
+    assert s.count == 3
+    assert s.min == 10.0 and s.max == 30.0
+    assert abs(s.mean - 20.0) < 1e-9
+    assert "n=3" in s.summary()

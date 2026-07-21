@@ -25,6 +25,7 @@ from bci_interfaces.srv import ExecuteGesture
 
 from .robot_registry import available_robots, create_robot
 from .robotic_hand_interface import FINGER_JOINTS
+from .metrics import LatencyStats, latency_ms
 
 
 class RobotNode(Node):
@@ -55,6 +56,8 @@ class RobotNode(Node):
         self.create_service(
             ExecuteGesture, "/bci/execute_gesture", self._on_service)
 
+        self._latency = LatencyStats()
+
     # -- command intake -----------------------------------------------------
 
     def _dispatch(self, gesture: int, confidence: float) -> tuple[bool, str]:
@@ -80,6 +83,12 @@ class RobotNode(Node):
         return result.accepted, result.message
 
     def _on_command(self, msg: BCICommand) -> None:
+        now = self.get_clock().now().to_msg()
+        dt = latency_ms(msg.header.stamp.sec, msg.header.stamp.nanosec,
+                        now.sec, now.nanosec)
+        self._latency.update(dt)
+        self.get_logger().info(
+            f"command→robot latency {dt:.1f} ms ({self._latency.summary()})")
         self._dispatch(msg.gesture, msg.confidence)
 
     def _on_service(self, request, response):

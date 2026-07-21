@@ -1,0 +1,13 @@
+[flake8]
+max-line-length = 99
+# ROS2 ament_python resource markers and build outputs
+exclude =
+    .git,
+    .venv,
+    build,
+    install,
+    log,
+    __pycache__
+# Labs 01-14 are scientific scripts; lint the engineered ROS2 code strictly.
+per-file-ignores =
+    labs/*:E,W,F

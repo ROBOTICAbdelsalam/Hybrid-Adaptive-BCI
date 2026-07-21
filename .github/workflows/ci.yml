@@ -1,0 +1,93 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  # --------------------------------------------------------------------------
+  # Fast lane: style + the pure-Python logic tests (no ROS2 install needed).
+  # --------------------------------------------------------------------------
+  quality:
+    name: Lint + ROS2 logic tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install tools
+        run: pip install pytest pycodestyle xacro
+
+      - name: Lint (ROS2 packages)
+        run: pycodestyle --max-line-length=99 ros2_workspace/src
+
+      - name: ROS2 pure-logic tests (33)
+        run: |
+          cd ros2_workspace/src
+          fail=0
+          for p in bci_robot_abstraction bci_bridge bci_hand_description \
+                   bci_hand_moveit_config bci_bringup; do
+            (cd "$p" && PYTHONPATH=. python -m pytest test/ -q) || fail=1
+          done
+          exit $fail
+
+  # --------------------------------------------------------------------------
+  # AI-pipeline validation: loads the committed models/artefacts and checks the
+  # scientific invariants (shapes, no leakage in the split, no NaNs, model I/O).
+  # --------------------------------------------------------------------------
+  ai-validation:
+    name: AI pipeline validation
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install AI dependencies
+        run: pip install -r requirements.txt
+
+      - name: Validate AI pipeline
+        run: python -m pytest tests/ -q
+
+  # --------------------------------------------------------------------------
+  # Real ROS2 build: colcon build + colcon test inside a ROS2 Jazzy container.
+  # This executes the build/test that cannot run on the macOS dev host.
+  # --------------------------------------------------------------------------
+  ros2-build:
+    name: colcon build + test (Jazzy)
+    runs-on: ubuntu-latest
+    container: ros:jazzy-ros-base
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Resolve dependencies
+        run: |
+          apt-get update
+          rosdep update --rosdistro jazzy || (rosdep init && rosdep update)
+          cd ros2_workspace
+          rosdep install --from-paths src --ignore-src -r -y
+
+      - name: colcon build
+        shell: bash
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          cd ros2_workspace
+          colcon build --event-handlers console_direct+
+
+      - name: colcon test
+        shell: bash
+        run: |
+          source /opt/ros/jazzy/setup.bash
+          cd ros2_workspace
+          colcon test --event-handlers console_direct+
+          colcon test-result --verbose
