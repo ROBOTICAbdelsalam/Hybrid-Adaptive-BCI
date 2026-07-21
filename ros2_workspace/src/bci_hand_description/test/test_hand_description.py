@@ -42,7 +42,7 @@ def test_five_actuated_finger_joints_with_correct_limits():
 
 def test_every_joint_references_existing_links():
     root = _urdf_root()
-    links = {l.get("name") for l in root.findall("link")}
+    links = {link.get("name") for link in root.findall("link")}
     for joint in root.findall("joint"):
         parent = joint.find("parent").get("link")
         child = joint.find("child").get("link")
@@ -52,7 +52,7 @@ def test_every_joint_references_existing_links():
 
 def test_kinematic_tree_is_connected_and_acyclic():
     root = _urdf_root()
-    links = {l.get("name") for l in root.findall("link")}
+    links = {link.get("name") for link in root.findall("link")}
     children = [j.find("child").get("link") for j in root.findall("joint")]
     # Exactly one root link (never a child) -> single connected tree.
     roots = links - set(children)
